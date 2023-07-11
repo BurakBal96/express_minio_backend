@@ -45,7 +45,7 @@ services:
       - MINIO_ROOT_USER=admin
       - MINIO_ROOT_PASSWORD=supersecret
       - MINIO_SERVER_URL=https://minio.example.com #use your own domain
-      - MINIO_BROWSER_REDIRECT_URL=https://console.example.com #use your own domain
+      - MINIO_BROWSER_REDIRECT_URL=https://console.minio.example.com #use your own domain
     image: quay.io/minio/minio:latest
     ports:
       - '9000:9000'
