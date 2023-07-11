@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "0eec6312-1de6-4c39-9684-c1f0bfffa5db",
+		"name": "Minio Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27682908"
+	},
+	"item": [
+		{
+			"name": "Images",
+			"item": [
+				{
+					"name": "Get Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/images/:imageName",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"images",
+								":imageName"
+							],
+							"variable": [
+								{
+									"key": "imageName",
+									"value": "test-f05ce818-32bd-4ea5-a834-e5e9c275a18b.png"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Image Upload Url",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/images/getUploadUrl?name=test.png",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"images",
+								"getUploadUrl"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "test.png"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bucket",
+			"item": [
+				{
+					"name": "Bucket List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/buckets",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"buckets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bucket Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/buckets/:bucketName",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"buckets",
+								":bucketName"
+							],
+							"variable": [
+								{
+									"key": "bucketName",
+									"value": "images"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Bucket",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/buckets/images",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"buckets",
+								"images"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Bucket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bucketName\": \"images\",\n    \"publicAccess\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/buckets",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"buckets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Empty Bucket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/buckets/images",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"buckets",
+								"images"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bucket Policies",
+			"item": [
+				{
+					"name": "Update Bucket Policy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n        {\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": [\n                    \"*\"\n                ]\n            },\n            \"Action\": [\n                \"s3:GetBucketLocation\",\n                \"s3:ListBucket\",\n                \"s3:ListBucketMultipartUploads\"\n            ],\n            \"Resource\": [\n                \"arn:aws:s3:::images2\"\n            ]\n        },\n        {\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": [\n                    \"*\"\n                ]\n            },\n            \"Action\": [\n                \"s3:ListMultipartUploadParts\",\n                \"s3:PutObject\",\n                \"s3:AbortMultipartUpload\",\n                \"s3:DeleteObject\",\n                \"s3:GetObject\"\n            ],\n            \"Resource\": [\n                \"arn:aws:s3:::images2/*\"\n            ]\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/bucketPolicies/images",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"bucketPolicies",
+								"images"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Bucket Policy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/bucketPolicies/images",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"bucketPolicies",
+								"images"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
